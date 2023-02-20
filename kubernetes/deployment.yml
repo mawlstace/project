@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-microservice-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-microservice
+  template:
+    metadata:
+      labels:
+        app: nginx-microservice
+    spec:
+      containers:
+      - name: nginx-microservice
+        image: mawlstace/nginx-microservice:1.0
+        ports:
+        - containerPort: 5000
+        resources:
+          limits:
+            cpu: "0.5"
+            memory: "512Mi"
+        lifecycle:
+          postStart:
+            exec:
+              command: ["sh", "-c", "kubectl port-forward service/nginx-microservice-service 8080:80"]

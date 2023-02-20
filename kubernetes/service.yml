@@ -1,0 +1,49 @@
+# for sure production enviroment to use loadblancer 
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: nginx-microservice-service
+# spec:
+#   selector:
+#     app: nginx-microservice
+#   ports:
+#     - protocol: TCP
+#       port: 80
+#       targetPort: 5000
+#   type: LoadBalancer
+
+
+# another solution to avoid loadbalncer cost to use clusterip and use ingress with it 
+#kubectl port-forward service/nginx-microservice-service 8080:80
+# then type curl localhost:8080 in another terminal 
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-microservice-service
+spec:
+  selector:
+    app: nginx-microservice
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 5000
+  type: ClusterIP
+
+
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: nginx-microservice-service
+# spec:
+#   selector:
+#     app: nginx-microservice
+#   ports:
+#     - protocol: TCP
+#       port: 80
+#       targetPort: 5000
+#       nodePort: 30080
+#   type: NodePort
+
+
+# to access the service type minkubeip with port 30080 and you will get a respone from pod 

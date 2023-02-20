@@ -1,0 +1,17 @@
+# .gitignore
+*.pem
+# Terraform files
+.terraform/
+*.tfstate
+*.tfstate.*.backup
+*.tfvars
+*.tfvars.json
+.terraform.lock.hcl
+# Local environment files
+*.backup
+*.lock.json
+*.log
+The .terraform directory contains Terraform state and configuration files, which can contain sensitive information and should not be version controlled or shared with others.
+The *.tfstate files are Terraform state files, which track the current state of your infrastructure.
+The `.tfstate.
+
